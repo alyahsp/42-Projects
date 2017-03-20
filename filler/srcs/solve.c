@@ -6,7 +6,7 @@
 /*   By: angavrel <angavrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/18 18:11:35 by angavrel          #+#    #+#             */
-/*   Updated: 2017/03/18 19:52:36 by angavrel         ###   ########.fr       */
+/*   Updated: 2017/03/19 23:43:48 by angavrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,29 +26,28 @@ void	solver(t_filler *f, int b[f->max.y][f->max.x],
 
 	points = NULL;
 	ply_area = (t_index) {.x = 0, .y = 0};
-	f->cpu_score = 0;
-	f->ply_score = 0;
-	LAST.y = f->min_dim.y + 42;
-	LAST.x = f->min_dim.x + 42;
+	LAST.y = f->min_dim.y - 42;
+	LAST.x = f->min_dim.x - 42;
 	put_piece(f, b, p, &points);
-	has_reached_borders(f, b);
 	if (points)
 	{
-		if (!has_captured_center(f, b) && f->goal)
-			break_through(f, points);
+		if (has_captured_center(f, b) && f->goal)
+		{
+			has_reached_borders(f, b);
+			break_through(f, b, points);
+		}
 		else
 			surround(f, b, points);
 		free_saved_positions(&points);
 	}
-	return_piece(LAST.y - f->min_dim.y, LAST.x - f->min_dim.x);
-}
-
-//	display_turn_nb(f);//
+	
+	display_turn_nb(f);//
 //	display_last(f);//
 //	display_piece(f->piece_dim, p); // debug function
-//	display_miniboard(f, f->min_area, f->max_area, b); // debug
-//	display_board(f->max, b); // debug
-//}
+	//	display_miniboard(f, f->min_area, f->max_area, b); // debug
+	display_board(f->max, b); // debug
+	return_piece(LAST.y - f->min_dim.y, LAST.x - f->min_dim.x);
+}
 
 /*
 ** main strategy is to surround opponent by finding the shortest distance
@@ -64,10 +63,16 @@ void	surround(t_filler *f, int b[f->max.y][f->max.x], t_point *points)
 			LAST = points->i;
 		else if (g_d(f, b, points->i) == g_d(f, b, LAST))
 		{
-			if (f->ver_hor > 0 && points->i.y < LAST.y)
+			if (!f->goal)
 				LAST = points->i;
-			else if (f->ver_hor < 0 && points->i.x < LAST.x)
-				LAST = points->i;
+			if (f->ver_hor > 0)
+			{
+				if ((f->goal & 1) ? points->i.y < LAST.y : points->i.y > LAST.y)
+					LAST = points->i;
+			}
+			else if (f->ver_hor < 0)
+				if ((f->goal & 2) ? points->i.x < LAST.x : points->i.x > LAST.x)
+					LAST = points->i;
 		}
 		points = points->next;
 	}
@@ -80,7 +85,7 @@ void	surround(t_filler *f, int b[f->max.y][f->max.x], t_point *points)
 ** it returns directly distance if equal to 2
 */
 
-int		g_d(t_filler *f, BOARD, t_index p)
+int		g_d(t_filler *f, int b[f->max.y][f->max.x], t_index p)
 {
 	t_index		i;
 	int			distance;

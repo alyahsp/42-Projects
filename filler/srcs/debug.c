@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   debug.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angavrel <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: angavrel <angavrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/18 18:47:44 by angavrel          #+#    #+#             */
-/*   Updated: 2017/03/18 18:48:30 by angavrel         ###   ########.fr       */
+/*   Updated: 2017/03/19 20:59:24 by angavrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,11 @@ void	display_min(t_filler *f)
 
 void	display_last(t_filler *f)
 {
+	ft_putstr_fd("trim (y, x) : (", 2);
+	ft_putnbr_fd(f->min_dim.y, 2);
+	ft_putstr_fd(", ", 2);
+	ft_putnbr_fd(f->min_dim.x, 2);
+	ft_putstr_fd(")\n", 2);
 	ft_putstr_fd("LAST (y, x) : (", 2);
 	ft_putnbr_fd(LAST.y - f->min_dim.y, 2);
 	ft_putstr_fd(", ", 2);

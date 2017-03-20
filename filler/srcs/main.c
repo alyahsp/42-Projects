@@ -6,7 +6,7 @@
 /*   By: angavrel <angavrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 05:38:00 by angavrel          #+#    #+#             */
-/*   Updated: 2017/03/18 19:50:55 by angavrel         ###   ########.fr       */
+/*   Updated: 2017/03/19 23:38:36 by angavrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,18 @@ int		main(void)
 	char		*line;
 
 	system("> board.map");
-	get_next_line(0, &line);
-	f.player = line[10] - '0';
-	f.cpu = (f.player & 2) >> 1 | (f.player & 1) << 1;
-	get_next_line(0, &line);
-	f.max = (t_index) {.y = 0, .x = 0};
-	filler_atoi(&f.max, line + 8);
+    get_next_line(0, &line);
+    f.player = line[10] - '0';
+    f.ply_name = &line[14];
+    f.cpu = (f.player & 2) >> 1 | (f.player & 1) << 1;
+    get_next_line(0, &line);
+    f.max = (t_index) {.y = 0, .x = 0};
+    filler_atoi(&f.max, line + 8);
 	f.turn = 0;
 	f.goal = 0;
-	while (1)
+	f.ply_score = 0;
+	f.cpu_score = 0;
+	while (f.turn < 500)
 		filler_loop(&f);
 	return (0);
 }
@@ -66,6 +69,9 @@ void	filler_loop(t_filler *f)
 	}
 	f->min_area = ft_check_min(f, b);
 	check_max_area(f, b);
+//	check_min(f, b);
+//	check_max(f, b);
+//	ft_putnbr_fd(f->min_area.x, 2);
 	SKIP_LINE;
 	f->piece_dim = (t_index) {.y = 0, .x = 0};
 	filler_atoi(&f->piece_dim, line + 6);

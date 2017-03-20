@@ -6,7 +6,7 @@
 /*   By: angavrel <angavrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/28 21:07:28 by angavrel          #+#    #+#             */
-/*   Updated: 2017/03/18 19:29:04 by angavrel         ###   ########.fr       */
+/*   Updated: 2017/03/19 19:21:05 by angavrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,8 @@ typedef struct		s_filler
 {
 	int				cpu;
 	int				player;
+	char			*cpu_name;
+	char			*ply_name;
 	int				turn;
 	t_index			max;
 	t_index			last_p;
@@ -158,8 +160,10 @@ int					has_captured_center(t_filler *f, int b[f->max.y][f->max.x]);
 int					get_relative_position(t_filler *f, t_index cpu_area,
 						t_index i);
 void				get_direction(t_filler *f, int b[f->max.y][f->max.x]);
-void				break_through(t_filler *f, t_point *points);
-int					reach_borders(t_filler *f, t_index p);
+void				break_through(t_filler *f, int b[f->max.y][f->max.x],
+						t_point *points);
+int					reach_borders(t_filler *f, int b[f->max.y][f->max.x],
+						t_index p);
 
 /*
 ** checks if sides are reached

@@ -6,7 +6,7 @@
 /*   By: angavrel <angavrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/18 00:54:16 by angavrel          #+#    #+#             */
-/*   Updated: 2017/03/18 19:51:25 by angavrel         ###   ########.fr       */
+/*   Updated: 2017/03/19 19:05:34 by angavrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,18 +29,14 @@ void	has_reached_borders(t_filler *f, int b[f->max.y][f->max.x])
 		f->goal |= (POSITION == NW || POSITION == W || POSITION == SW) ? 4 : 0;
 		f->goal |= (POSITION == NW || POSITION == NE || POSITION == N) ? 8 : 0;
 	}
-	if (f->goal & 1)
-		if (has_reached_top(f, b))
-			f->goal |= ~1;
-	if (f->goal & 2)
-		if (has_reached_left(f, b))
-			f->goal |= ~2;
-	if (f->goal & 4)
-		if (has_reached_right(f, b))
-			f->goal |= ~4;
-	if (f->goal & 8)
-		if (has_reached_bot(f, b))
-			f->goal |= ~8;
+	if ((f->goal & 1) && has_reached_top(f, b))
+			f->goal &= ~1;
+	if ((f->goal & 2) && has_reached_left(f, b))
+			f->goal &= ~2;
+	if ((f->goal & 4) && has_reached_right(f, b))
+			f->goal &= ~4;
+	if ((f->goal & 8) && has_reached_bot(f, b))
+			f->goal &= ~8;
 }
 
 int		has_reached_top(t_filler *f, int b[f->max.y][f->max.x])
