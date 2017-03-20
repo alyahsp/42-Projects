@@ -6,7 +6,7 @@
 #    By: angavrel <angavrel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/09/12 13:55:55 by angavrel          #+#    #+#              #
-#    Updated: 2017/03/16 15:34:23 by angavrel         ###   ########.fr        #
+#    Updated: 2017/03/20 03:08:27 by angavrel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -207,7 +207,6 @@ CUT	=	"\033[K"
 
 all:	$(NAME)
 		
-
 $(NAME):$(OBJ)
 		@ar rc $(NAME) $(OBJ)
 		@ranlib $(NAME)
@@ -221,7 +220,7 @@ $(OBJ_PATH)%.o: $(SRCS_PATH)%.c
 
 clean:
 		@/bin/rm -rf $(OBJ_PATH)
-		@echo "\033[31mObjects files \033[1;31m$(OBJS_LIST)\033[1;0m\033[31m removed.\033[0m"
+		@echo "\033[1;31m$(NAME) \033[1;0m\033[31mobjects files removed.\033[0m"
 
 fclean:	clean
 		@/bin/rm -rf $(NAME)

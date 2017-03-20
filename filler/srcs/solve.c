@@ -6,7 +6,7 @@
 /*   By: angavrel <angavrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/18 18:11:35 by angavrel          #+#    #+#             */
-/*   Updated: 2017/03/19 23:43:48 by angavrel         ###   ########.fr       */
+/*   Updated: 2017/03/20 01:34:39 by angavrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	solver(t_filler *f, int b[f->max.y][f->max.x],
 		free_saved_positions(&points);
 	}
 	
-	display_turn_nb(f);//
+//	display_turn_nb(f);//
 //	display_last(f);//
 //	display_piece(f->piece_dim, p); // debug function
 	//	display_miniboard(f, f->min_area, f->max_area, b); // debug

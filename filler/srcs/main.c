@@ -6,7 +6,7 @@
 /*   By: angavrel <angavrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 05:38:00 by angavrel          #+#    #+#             */
-/*   Updated: 2017/03/19 23:38:36 by angavrel         ###   ########.fr       */
+/*   Updated: 2017/03/20 01:45:55 by angavrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int		main(void)
 	f.goal = 0;
 	f.ply_score = 0;
 	f.cpu_score = 0;
-	while (f.turn < 500)
+	while (f.turn < 400)
 		filler_loop(&f);
 	return (0);
 }
@@ -77,6 +77,7 @@ void	filler_loop(t_filler *f)
 	filler_atoi(&f->piece_dim, line + 6);
 	get_piece_dimension(f, line, b);
 	SKIP_LINE;
+	++f->turn;
 }
 
 /*

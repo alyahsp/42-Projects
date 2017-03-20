@@ -6,7 +6,7 @@
 /*   By: angavrel <angavrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/28 21:07:28 by angavrel          #+#    #+#             */
-/*   Updated: 2017/03/19 19:21:05 by angavrel         ###   ########.fr       */
+/*   Updated: 2017/03/20 01:59:26 by angavrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,6 +174,19 @@ int					has_reached_bot(t_filler *f, int b[f->max.y][f->max.x]);
 int					has_reached_left(t_filler *f, int b[f->max.y][f->max.x]);
 int					has_reached_right(t_filler *f, int b[f->max.y][f->max.x]);
 void				has_reached_borders(t_filler *f, int b[f->max.y][f->max.x]);
+
+/*
+** scoring system when trying to reach sides
+*/
+
+int					score_bot(t_filler *f,
+						int b[f->max.y][f->max.x], t_index p);
+int					score_left(t_filler *f,
+						int b[f->max.y][f->max.x], t_index p);
+int					score_right(t_filler *f,
+						int b[f->max.y][f->max.x], t_index p);
+int					score_top(t_filler *f,
+						int b[f->max.y][f->max.x], t_index p);
 
 /*
 ** Save relevant (y, x) valid positions inside a list ~ valid_positions.c
